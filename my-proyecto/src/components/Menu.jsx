@@ -1,4 +1,34 @@
+import { useEffect, useState } from 'react'
 const Menu = () => {
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [shows, setShows] = useState('')
+
+  const getData = async (event) => {
+    event.preventDefault()
+    console.log(shows)
+    try {
+      const req = await fetch(`https://api.tvmaze.com/search/shows?q=${shows}`)
+      const res = await req.json()
+      console.log(res)
+      setData(res)
+    } catch (error) {
+      setError(String(error))
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleChange = (event) => {
+    setShows(event.target.value)
+  }
+
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
       <div className='container-fluid'>
@@ -19,14 +49,13 @@ const Menu = () => {
               </a>
             </li>
           </ul>
-          <form className='d-flex'>
-            <input className='form-control me-sm-2' type='text' placeholder='Buscar' />
+          <form className='d-flex' onSubmit={getData}>
+            <input className='form-control me-sm-2' type='text' placeholder='Buscar' onChange={handleChange} />
             <button className='btn btn-secondary my-2 my-sm-0' type='submit'>Buscar</button>
           </form>
         </div>
       </div>
     </nav>
-
   )
 }
 
