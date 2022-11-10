@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 
 import './styles/index.css'
-import Movies from './components/Movies'
+import App from './components/App'
 
 const root = document.getElementById('root')
-createRoot(root).render(<Movies />)
+createRoot(root).render(<App />)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 const Menu = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
